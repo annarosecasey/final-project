@@ -55,7 +55,7 @@ function draw() {
     triangle(trees[i].x -15, trees[i].y, trees[i].x + 10, trees[i].y -70, trees[i].x + 40, trees[i].y)
     
     
-    removeCollisions(i);
+    //removeCollisions(i);
     // advance them forward
     trees[i].x += trees[i].xDir;
     trees[i].y += trees[i].yDir;

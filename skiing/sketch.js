@@ -18,7 +18,7 @@ function draw() {
   currentTime = time();
   jumpValueR = jumpValueR - jumpDir;
   jumpValueS = jumpValueS - jumpDir;
-  fill(0); //make text white
+  fill(0); //make text black
   text("X: " + mouseX, 0, 5, 300, 300); // print x coordinate in upper left corner
   text("Y: " + mouseY, 0, 20, 300, 300); // print y coordinate in upper left corner, under x coordinate 
   text(currentTime, 0, 40, 300, 300);
@@ -41,7 +41,7 @@ function draw() {
     
   }
 
-  if (100 < currentTime || currentTime < 490 ) {
+  if (300 < currentTime || currentTime < 490 ) {
     tree(levelOne, 700 + jumpValueS);
     tree(levelTwo, 750 + jumpValueS);
     tree(levelThree, 750 + jumpValueS);

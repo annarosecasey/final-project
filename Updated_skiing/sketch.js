@@ -1,14 +1,15 @@
 var trees = [];
-var numTrees = 100;
+var numTrees = 150;
 var snowboardRight;
 var snowboardLeft;
 var snowboard = [];
-var snowBoardx = 250;
-var snowBoardy = 10;
 backgroundColor = 255;
 score = 100;
 xDir = 0;
 yDir = -1;
+objectSpeed = 2
+page = 1
+
 function preload() {
   snowboardRight = loadImage("Snowboard_Right.png");
   snowboardLeft = loadImage("Snowboard_Left.png");
@@ -52,29 +53,34 @@ function draw() {
   background(backgroundColor);
   currentSnowboarder();
   checkTrees();
-  text("Score: " + score, 0, 5, 300, 300); // print x coordinate in upper left corner
+  currentTime = skiTime();
+  gameOver();
+  speed();
+  fill(0);
+  text("Score: " + score, 0, 5, 300, 300);
+  text("Frame Rate: " + currentTime, 0, 20, 300, 300); // print x coordinate in upper left corner
   // loop through the circles array
   // draw all the circles
   for (i = 0; i < trees.length; i++) {
-    fill(0);
+    noFill();
     rect(trees[i].x - 10, trees[i].y - 50, trees[i].whiteBoxX, trees[i].whiteBoxY)
     fill(trees[i].treeColor);
     rect(trees[i].x, trees[i].y, trees[i].length, trees[i].tallness);
     fill(trees[i].leavesColor);
     triangle(trees[i].x - 15, trees[i].y, trees[i].x + 10, trees[i].y - 70, trees[i].x + 40, trees[i].y)
-    fill(150, 0,0);
-    ellipse(trees[i].x, trees[i].y, 5, 5)
+
+
 
     trees[i].x += xDir;
-    trees[i].y +=  yDir - 2;
+    trees[i].y += yDir - objectSpeed;
   }
 
   if (keyIsPressed) { // Sets up the actions for when a key is pressed
     if (keyCode == RIGHT_ARROW) { // Sets up the action for pressing the RIGHT arrow
-      snowboard.x = min(snowboard.x + 2, 450); // Moves the basketball right 10 pixels at a time - stops at 950
+      snowboard.x = min(snowboard.x + objectSpeed, 450); // Moves the basketball right 10 pixels at a time - stops at 950
       snowboard.img = snowboardRight
     } else if (keyCode == LEFT_ARROW) { // Sets up the action for pressing the LEFT arrow
-      snowboard.x = max(0, snowboard.x - 2); // Moves the basketball left 10 pixels at a time - stops at 0
+      snowboard.x = max(0, snowboard.x - objectSpeed); // Moves the basketball left 10 pixels at a time - stops at 0
       snowboard.img = snowboardLeft
     }
   }
@@ -82,18 +88,31 @@ function draw() {
 
 function checkTrees() {
   for (i = 0; i < trees.length; i++) {
-    if (snowboard.x + 30> trees[i].x 
-    && snowboard.y + 30  > trees[i].y 
-    && snowboard.x + 30< trees[i].x + trees[i].length
-    && snowboard.y + 30 < trees[i].y + trees[i].tallness) { 
-    score = score - 1;
-    
+    if (snowboard.x + 30 > trees[i].x && snowboard.y + 30 > trees[i].y && snowboard.x + 30 < trees[i].x + trees[i].length && snowboard.y + 30 < trees[i].y + trees[i].tallness) {
+      score = score - 1;
+    }
   }
-}
 }
 
 function currentSnowboarder() {
   image(snowboard.img, snowboard.x, snowboard.y, 60, 60);
-  fill(150, 0,0);
-  ellipse(snowboard.x + 30, snowboard.y + 30, 5, 5)
+  fill(150, 0, 0);
+}
+
+function skiTime() {
+  return frameCount; // modulo loops frameCount at 1800 by returning remainder after dividing by 1800
+}
+
+function gameOver() { // when mouse is pressed
+  if (currentTime > 2300)
+  //page = 1 + page; // make page one minus page
+    background(100, 30, 100);
+    fill(255);
+    textSize(30);
+    text("GAME OVER", 200, 200, 300, 300)
+}
+function speed() { // when mouse is pressed
+  if (currentTime > 600) {
+    objectSpeed = 3
+  }
 }

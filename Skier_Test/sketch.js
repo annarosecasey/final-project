@@ -25,7 +25,7 @@ snowboard = {
 
 function draw() {
   background(255);
-  image(snowboard.img, snowboard.x, snowboard.y, 60, 60);
+  currentSnowboarder();
   if (keyIsPressed) { // Sets up the actions for when a key is pressed
     if (keyCode == RIGHT_ARROW) { // Sets up the action for pressing the RIGHT arrow
       snowboard.x = min(snowboard.x + snowboard.xDir, 450);// Moves the snowboarder right by xDir
@@ -35,4 +35,9 @@ function draw() {
       snowboard.img = snowboardLeft;
     }
   }
+}
+
+function currentSnowboarder () {
+  image(snowboard.img, snowboard.x, snowboard.y, 60, 60);
+  
 }

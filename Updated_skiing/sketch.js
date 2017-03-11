@@ -23,7 +23,6 @@ function setup() {
   // add them to teh circles array
   for (i = 0; i < numCircles; i++) {
     // define the current circles size
-    
     // add this new circle to the array
     append(trees, 
       { length: 20,
@@ -71,20 +70,11 @@ function draw() {
       snowBoardx = max(0, snowBoardx - 10); // Moves the basketball left 10 pixels at a time - stops at 0
     }
   }
-}
 
 
+for (i = 0; i < trees.length; i++){
+  if (trees[i].whiteBoxX == snowBoardx)
   
-for (i = 0; i < trees.length; i++) {
-    if (!adjustTreePosition(i)) {
-      // advance them forward
-      noFill();
-      rect(trees[i].x - 10, trees[i].y - 50, trees[i].whiteBoxX, trees[i].whiteBoxY)
-      fill(trees[i].treeColor);
-      rect(trees[i].x, trees[i].y, trees[i].length, trees[i].tallness);
-      fill(trees[i].leavesColor);
-      triangle(trees[i].x -15, trees[i].y, trees[i].x + 10, trees[i].y -70, trees[i].x + 40, trees[i].y)
-      trees[i].x += trees[i].xDir;
-      trees[i].y += trees[i].yDir;
-    }
-  }
+}
+  
+

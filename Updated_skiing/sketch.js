@@ -3,8 +3,6 @@ var numTrees = 100;
 var snowboardRight;
 var snowboardLeft;
 var snowboard = [];
-var snowBoardx = 250;
-var snowBoardy = 10;
 page = 0;
 
 function preload() {
@@ -15,7 +13,7 @@ function preload() {
 function setup() {
   // create my canvas
   createCanvas(500, 500);
-  
+
   snowboard = {
     x: 250,
     y: 0,
@@ -24,16 +22,13 @@ function setup() {
     snowboxY: 30,
     img: snowboardRight
   };
-  
+
   noStroke();
 
   // add them to teh circles array
   for (i = 0; i < numTrees; i++) {
     // define the current circles size
-<<<<<<< HEAD
-=======
 
->>>>>>> ddb046d2cfb53e86fdcb742b238a35d6090231d5
     // add this new circle to the array
     append(trees, {
       length: 20,
@@ -73,40 +68,29 @@ function draw() {
 
   if (keyIsPressed) { // Sets up the actions for when a key is pressed
     if (keyCode == RIGHT_ARROW) { // Sets up the action for pressing the RIGHT arrow
-      snowBoardx = min(snowBoardx + 2, 450); // Moves the basketball right 10 pixels at a time - stops at 950
+      snowboard.x = min(snowboard.x + 2, 450); // Moves the basketball right 10 pixels at a time - stops at 950
       snowboard.img = snowboardRight
     } else if (keyCode == LEFT_ARROW) { // Sets up the action for pressing the LEFT arrow
-      snowBoardx = max(0, snowBoardx - 2); // Moves the basketball left 10 pixels at a time - stops at 0
+      snowboard.x = max(0, snowboard.x - 2); // Moves the basketball left 10 pixels at a time - stops at 0
       snowboard.img = snowboardLeft
     }
   }
 }
 
-<<<<<<< HEAD
-for (i = 0; i < trees.length; i++){
-  if (trees[i].whiteBoxX == snowBoardx)
-  
-}
-  
+function checkTrees() {
+  for (i = 0; i < trees.length; i++) {
+    if (trees[i].whiteBoxX == snowboard.x) {
 
-=======
-
-
-for (i = 0; i < trees.length; i++) {
-  if (!adjustTreePosition(i)) {
-    // advance them forward
-    noFill();
-    rect(trees[i].x - 10, trees[i].y - 50, trees[i].whiteBoxX, trees[i].whiteBoxY)
-    fill(trees[i].treeColor);
-    rect(trees[i].x, trees[i].y, trees[i].length, trees[i].tallness);
-    fill(trees[i].leavesColor);
-    triangle(trees[i].x - 15, trees[i].y, trees[i].x + 10, trees[i].y - 70, trees[i].x + 40, trees[i].y)
-    trees[i].x += trees[i].xDir;
-    trees[i].y += trees[i].yDir;
+    }
   }
 }
 
+
+
+
+
+
+
 function currentSnowboarder() {
-    image(snowboard.img, snowBoardx, snowBoardy, 60, 60);
+  image(snowboard.img, snowboard.x, snowboard.y, 60, 60);
 }
->>>>>>> ddb046d2cfb53e86fdcb742b238a35d6090231d5

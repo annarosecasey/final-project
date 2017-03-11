@@ -3,12 +3,12 @@ var numTrees = 150;
 var snowboardRight;
 var snowboardLeft;
 var snowboard = [];
+page = 0;
 backgroundColor = 255;
 score = 100;
 xDir = 0;
 yDir = -1;
-objectSpeed = 2
-page = 1
+objectSpeed = 1;
 
 function preload() {
   snowboardRight = loadImage("Snowboard_Right.png");
@@ -69,8 +69,6 @@ function draw() {
     fill(trees[i].leavesColor);
     triangle(trees[i].x - 15, trees[i].y, trees[i].x + 10, trees[i].y - 70, trees[i].x + 40, trees[i].y)
 
-
-
     trees[i].x += xDir;
     trees[i].y += yDir - objectSpeed;
   }
@@ -107,10 +105,11 @@ function gameOver() { // when mouse is pressed
   if (currentTime > 2300)
   //page = 1 + page; // make page one minus page
     background(100, 30, 100);
-    fill(255);
-    textSize(30);
-    text("GAME OVER", 200, 200, 300, 300)
+  fill(255);
+  textSize(30);
+  text("GAME OVER", 200, 200, 300, 300)
 }
+
 function speed() { // when mouse is pressed
   if (currentTime > 600) {
     objectSpeed = 3

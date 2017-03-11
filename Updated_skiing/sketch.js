@@ -6,6 +6,7 @@ var snowboardLeft;
 var snowboard = [];
 var snowBoardx = 250;
 var snowBoardy = 10;
+page = 0;
 
 function preload() {
   snowboardRight = loadImage("Snowboard_Right.png");
@@ -29,8 +30,8 @@ function setup() {
         tallness: 40,
         whiteBoxX: 40,
         whiteBoxY: 80,
-        x: random(20, 300),
-        y: random(700,500),
+        x: random(1, 450),
+        y: random(500,7000),
         xDir: 0,
         yDir: -1,
         treeColor: color(102,59,26),
@@ -60,6 +61,7 @@ function draw() {
     trees[i].x += trees[i].xDir;
     trees[i].y += trees[i].yDir;
 }
+
   if (keyIsPressed) { // Sets up the actions for when a key is pressed
     if (keyCode == RIGHT_ARROW) { // Sets up the action for pressing the RIGHT arrow
       snowBoardx = min(snowBoardx + 10, 500); // Moves the basketball right 10 pixels at a time - stops at 950
@@ -71,17 +73,18 @@ function draw() {
   }
 }
 
+
   
-
-
-function removeCollisions(i) {
-  for (j = 0; j < trees.length; j++) {
-    if (i != j) {
-      if (Math.abs(trees[i].x - trees[j].x) < 90 &&
-          Math.abs(trees[i].y - trees[j].y) < 90) {
-        trees.splice(i, 1);
-        j = trees.length;
-      }
-    } 
+for (i = 0; i < trees.length; i++) {
+    if (!adjustTreePosition(i)) {
+      // advance them forward
+      noFill();
+      rect(trees[i].x - 10, trees[i].y - 50, trees[i].whiteBoxX, trees[i].whiteBoxY)
+      fill(trees[i].treeColor);
+      rect(trees[i].x, trees[i].y, trees[i].length, trees[i].tallness);
+      fill(trees[i].leavesColor);
+      triangle(trees[i].x -15, trees[i].y, trees[i].x + 10, trees[i].y -70, trees[i].x + 40, trees[i].y)
+      trees[i].x += trees[i].xDir;
+      trees[i].y += trees[i].yDir;
+    }
   }
-}

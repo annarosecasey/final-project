@@ -70,7 +70,7 @@ function draw() {
       snowBoardx = max(0, snowBoardx - 10); // Moves the basketball left 10 pixels at a time - stops at 0
     }
   }
-
+}
 
 for (i = 0; i < trees.length; i++){
   if (trees[i].whiteBoxX == snowBoardx)

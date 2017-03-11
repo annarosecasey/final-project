@@ -4,10 +4,6 @@ var snowboardRight;
 var snowboardLeft;
 var snowboard = [];
 page = 0;
-
-
-var snowBoardx = 250;
-var snowBoardy = 10;
 backgroundColor = 255;
 score = 100;
 xDir = 0;
@@ -66,8 +62,6 @@ function draw() {
     rect(trees[i].x, trees[i].y, trees[i].length, trees[i].tallness);
     fill(trees[i].leavesColor);
     triangle(trees[i].x - 15, trees[i].y, trees[i].x + 10, trees[i].y - 70, trees[i].x + 40, trees[i].y)
-    fill(150, 0, 0);
-    ellipse(trees[i].x, trees[i].y, 5, 5)
 
     trees[i].x += xDir;
     trees[i].y += yDir - 2;
@@ -84,30 +78,21 @@ function draw() {
   }
 }
 
+
 function checkTrees() {
   for (i = 0; i < trees.length; i++) {
-    if (trees[i].whiteBoxX == snowboard.x) {
-
+    if (snowboard.x + 30 > trees[i].x 
+    && snowboard.y + 30 > trees[i].y 
+    && snowboard.x + 30 < trees[i].x + trees[i].length 
+    && snowboard.y + 30 < trees[i].y + trees[i].tallness) {
+      score = score - 1;
     }
   }
 }
 
 
 
-
-
-
-
-function currentSnowboarder() {
-  image(snowboard.img, snowboard.x, snowboard.y, 60, 60); 
-  if (snowboard.x + 30 > trees[i].x && snowboard.y + 30 > trees[i].y && snowboard.x + 30 < trees[i].x + trees[i].length && snowboard.y + 30 < trees[i].y + trees[i].tallness) {
-    score = score - 1;
-
+  function currentSnowboarder() {
+    image(snowboard.img, snowboard.x, snowboard.y, 60, 60);
+    fill(150, 0, 0);
   }
-}
-
-function currentSnowboarder() {
-  image(snowboard.img, snowboard.x, snowboard.y, 60, 60);
-  fill(150, 0, 0);
-  ellipse(snowboard.x + 30, snowboard.y + 30, 5, 5);
-}

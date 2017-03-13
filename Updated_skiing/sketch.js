@@ -25,6 +25,9 @@ function preload() {
   myFont = loadFont('VT323-Regular.ttf'); // digital font
   snowboardRight = loadImage("Snowboard_Right.png"); //right image
   snowboardLeft = loadImage("Snowboard_Left.png"); // left image
+  snowboardWin = loadImage("Snowboard_Win.png"); // winning image
+  snowboardLose = loadImage("Snowboard_Lose.png"); // losing image
+  snowboardLift = loadImage("Snowboard_Lift.png"); // lift image
 }
 
 function setup() {
@@ -36,18 +39,18 @@ function setup() {
 
   snowboard = { //snowboard object
     x: 250, // starting x
-    y: 0, // starting y
+    y: 10, // starting y
     xDir: 5, // speed moving left and right
     img: snowboardRight //sets up intial image of snowboarder
   };
 
-  
+
   noStroke(); //no stroke around trees
-  
+
   for (i = 0; i < numTrees; i++) { // adds trees to object in random location
 
     append(trees, { //tree object
-      length: 20, 
+      length: 20,
       tallness: 40,
       whiteBoxX: 40, //invisible box around tree 
       whiteBoxY: 80, //invisible box around tree
@@ -79,7 +82,7 @@ function draw() {
     gameOverLose(); //when the player loses
     //text("Frame Rate: " + currentTime, 0, 20, 300, 300);
     currentSnowboarder(); // calls snowboarder
-    
+
     for (i = 0; i < trees.length; i++) { // draws trees
       noFill(); // no fill on invisible box
       rect(trees[i].x - 10, trees[i].y - 50, trees[i].whiteBoxX, trees[i].whiteBoxY)
@@ -108,7 +111,7 @@ function draw() {
   }
 }
 
-function intro() { //starts intro functions
+function intro() { //creates intro animation functions
   noStroke();
   fill(255); // white
   triangle(0, 15, 385, 500, 0, 500); // mountain
@@ -124,6 +127,7 @@ function intro() { //starts intro functions
   line(0, -150, 520, 500); // tram stripe
   rect(liftX, liftY, 80, 50); // tram box
   line(liftX + 40, liftY - 50, liftX + 40, liftY); //tram stripe
+  image(snowboardLift, liftX + 15, liftY - 10, 60, 90);
   fill(125); // gray
   rect(liftX, liftY + 20, 80, 20); //inside tram
   liftX = max(liftX - 1, 15); //makes lift move left
@@ -157,16 +161,12 @@ function introTree(x, y) { // draws itnro trees
   triangle(x - 15, y, x + 10, y - 70, x + 40, y);
 }
 
-function currentSnowboarder() { // draws snowboarders
-  image(snowboard.img, snowboard.x, snowboard.y, 60, 60); //location
-}
-
 function checkTrees() { //checks if snowboard hits the trees and shows Ouch or play sounds if true
   for (i = 0; i < trees.length; i++) {
     if (snowboard.x + 30 > trees[i].x //if snowboard x overlaps with x on the left side
-    && snowboard.y + 30 > trees[i].y //if snowboard y overlaps with y on the top side
-    && snowboard.x + 30 < trees[i].x + trees[i].length //if snowboard x overlaps with x on the right side
-    && snowboard.y + 30 < trees[i].y + trees[i].tallness) {//if snowboard y overlaps with y on the bottom side
+      && snowboard.y + 30 > trees[i].y //if snowboard y overlaps with y on the top side
+      && snowboard.x + 30 < trees[i].x + trees[i].length //if snowboard x overlaps with x on the right side
+      && snowboard.y + 30 < trees[i].y + trees[i].tallness) { //if snowboard y overlaps with y on the bottom side
       score = score - 1; // subtract a point
       background(200, 0, 0); // make background red
       fill(255); // text white
@@ -187,9 +187,9 @@ function skiTime() { //variable for time beginning on page 1
 }
 
 
-  function currentSnowboarder() { //snowboard dude
-    image(snowboard.img, snowboard.x, snowboard.y, 60, 60); //location and size of image
-  }
+function currentSnowboarder() { //snowboard dude
+  image(snowboard.img, snowboard.x, snowboard.y, 60, 80); //location and size of image
+}
 
 function turnMusicUpText() { //shows music text 
   if (currentTime > 0 && currentTime < 200) { //page 1 time is between 0 and 200
@@ -229,8 +229,9 @@ function gameOver() { // when game is over
     background(100, 30, 100); // purple
     fill(255); //white
     textSize(50); // big
-    text("Nice job!", 180, 200, 300, 300)
-    text("Score: " + score, 180, 375, 300)
+    text("Nice job!", 160, 200, 300, 300)
+    text("Score: " + score, 160, 375, 300)
+    snowboard.img = snowboardWin;
   }
 }
 
@@ -239,8 +240,9 @@ function gameOverLose() { // when user loses the game, show game over
     background(100, 30, 100);
     fill(255);
     textSize(50);
-    text("GAME OVER", 150, 200, 300, 300)
-    text("Score: " + 0, 180, 375, 300)
+    text("GAME OVER", 160, 200, 300, 300)
+    text("Score: " + 0, 160, 375, 300)
+    snowboard.img = snowboardLose;
   }
 }
 

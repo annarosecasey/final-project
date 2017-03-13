@@ -168,11 +168,12 @@ function currentSnowboarder() {
   fill(150, 0, 0);
 }
 
-
-
 function checkTrees() {
   for (i = 0; i < trees.length; i++) {
-    if (snowboard.x + 30 > trees[i].x && snowboard.y + 30 > trees[i].y && snowboard.x + 30 < trees[i].x + trees[i].length && snowboard.y + 30 < trees[i].y + trees[i].tallness) {
+    if (snowboard.x + 30 > trees[i].x 
+    && snowboard.y + 30 > trees[i].y 
+    && snowboard.x + 30 < trees[i].x + trees[i].length 
+    && snowboard.y + 30 < trees[i].y + trees[i].tallness) {
       score = score - 1;
       background(200, 0, 0);
       fill(255);
@@ -191,6 +192,12 @@ function skiTime() {
     return frameCount - startTime;
   }
 }
+
+
+  function currentSnowboarder() {
+    image(snowboard.img, snowboard.x, snowboard.y, 60, 60);
+    fill(150, 0, 0);
+  }
 
 function turnMusicUpText() {
   if (currentTime > 0 && currentTime < 200) {

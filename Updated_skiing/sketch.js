@@ -1,6 +1,6 @@
 // Julie Stuart and Anna Casey
 // last edited 3/12/2017
-//Final project is a skiing game where users ski down hill and avoid trees
+// Final project is a skiing game where users ski down hill and avoid trees
 var trees = []; // tree array
 var numTrees = 300; // number of trees
 var snowboardRight; // snowboard image right

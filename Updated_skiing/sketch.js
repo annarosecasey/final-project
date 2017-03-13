@@ -1,3 +1,6 @@
+// Julie Stuart and Anna Casey
+// last edited 3/12/2017
+//Final project is a skiing game where users ski down hill and avoid trees
 var trees = []; // tree array
 var numTrees = 300; // number of trees
 var snowboardRight; // snowboard image right
@@ -17,7 +20,7 @@ liftY = 450; // starting position of lift for y
 var startTime // time after user hits start
 
 function preload() {
-  mySound = loadSound('eye.mp3'); //eye of the tiger music
+  mySound = loadSound('Eye.mp3'); //eye of the tiger music
   crash = loadSound('jab_fixed.m4a') // crash sound
   myFont = loadFont('VT323-Regular.ttf'); // digital font
   snowboardRight = loadImage("Snowboard_Right.png"); //right image
